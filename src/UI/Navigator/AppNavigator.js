@@ -21,7 +21,6 @@ const AppNavigator = createStackNavigator(
   },
   {
     initialRouteName: Scene.Home.key,
-    headerMode: "none",
     navigationOptions: {
       gesturesEnabled: false
     }

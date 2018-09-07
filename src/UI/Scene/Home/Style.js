@@ -6,10 +6,9 @@
 import { StyleSheet } from "react-native";
 
 const Style = StyleSheet.create({
-  homeView: {
+  homeFlatList: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: "#f1f1f1"
   }
 });
 

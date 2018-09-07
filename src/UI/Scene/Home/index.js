@@ -14,6 +14,7 @@ import Style from "./Style";
 const HomeScene = props => {
   return (
     <FlatList
+      style={Style.homeFlatList}
       data={[
         { key: "Devin" },
         { key: "Jackson" },
