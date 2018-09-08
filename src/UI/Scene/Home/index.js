@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 /**
  * Local imports
  */
+import convertMillisToMinutesAndSeconds from "../../../Utils/generic";
 import Style from "./Style";
 import Card from "../../Components/Card";
 import Button from "../../Components/Button";
@@ -23,12 +24,13 @@ class HomeScene extends Component {
   render() {
     const { songsList } = this.props.songs;
     const parsedSongsList = songsList.map(
-      ({ trackId, artistName, artworkUrl100, trackName }) => {
+      ({ trackId, artistName, artworkUrl100, trackName, trackTimeMillis }) => {
         return {
           key: trackId.toString(),
           artistName,
           artworkUrl100,
-          trackName
+          trackName,
+          length: convertMillisToMinutesAndSeconds(trackTimeMillis)
         };
       }
     );
@@ -38,7 +40,7 @@ class HomeScene extends Component {
         {parsedSongsList.map(songDatas => (
           <Card {...songDatas} />
         ))}
-        <Button onPress={() => console.log("wesh")} label={"Load more ..."} />
+        <Button onPress={() => console.log("wesh")} label="Load more ..." />
       </ScrollView>
     );
   }

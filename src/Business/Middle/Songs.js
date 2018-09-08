@@ -11,10 +11,11 @@ import NetworkUrls from "../../Layer/Network/NetworkUrls";
 const SongsMidExecuteNextSongsApiRequestMid = store => next => action => {
   const { dispatch } = store;
 
+  // Pour gerer la pagination =>> &offset=3&
   switch (action.type) {
     case ApiActions.API_REQUEST:
       HttpClient.get(
-        `/${NetworkUrls.action}${NetworkUrls.nekfeuSongs}&${
+        `/${NetworkUrls.action}${NetworkUrls.nekfeuSongs}${
           NetworkUrls.resultLimit
         }`
       )
