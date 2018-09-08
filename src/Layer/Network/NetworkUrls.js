@@ -21,7 +21,7 @@ class NetworkUrls {
   }
 
   static get resultLimit() {
-    return "limit=1";
+    return "limit=10";
   }
 
   // ------------------------------------------------

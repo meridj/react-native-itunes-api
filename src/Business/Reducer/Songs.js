@@ -6,10 +6,8 @@
 import { SongsActions } from "../Action/Songs";
 
 const INITIAL_STATE = {
-  songs: {
-    list: [],
-    isFetching: false
-  }
+  songsList: [],
+  isFetching: false
 };
 
 const SongsReducer = (state = INITIAL_STATE, action) => {
@@ -20,10 +18,7 @@ const SongsReducer = (state = INITIAL_STATE, action) => {
     case SongsActions.SET_NEXT_SONGS:
       return {
         ...state,
-        songs: {
-          ...state.songs,
-          list: [...state.songs.list, ...action.payload]
-        }
+        songsList: [...state.songsList, ...action.payload]
       };
     default:
       return state;

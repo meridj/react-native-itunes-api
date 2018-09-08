@@ -16,18 +16,10 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <View style={styles.rootView}>
-          <AppNavigator />
-        </View>
+        <AppNavigator />
       </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  rootView: {
-    flex: 1
-  }
-});
 
 export default App;

@@ -4,13 +4,15 @@
  * Npm imports
  */
 import React, { Component } from "react";
-import { FlatList, Text } from "react-native";
+import { ScrollView } from "react-native";
 import { connect } from "react-redux";
 
 /**
  * Local imports
  */
 import Style from "./Style";
+import Card from "../../Components/Card";
+import Button from "../../Components/Button";
 import * as actions from "../../../Business/Action/";
 
 class HomeScene extends Component {
@@ -19,25 +21,25 @@ class HomeScene extends Component {
   }
 
   render() {
+    const { songsList } = this.props.songs;
+    const parsedSongsList = songsList.map(
+      ({ trackId, artistName, artworkUrl100, trackName }) => {
+        return {
+          key: trackId.toString(),
+          artistName,
+          artworkUrl100,
+          trackName
+        };
+      }
+    );
+
     return (
-      <FlatList
-        style={Style.homeFlatList}
-        data={[
-          { key: "Devin" },
-          { key: "Jackson" },
-          { key: "James" },
-          { key: "Joel" },
-          { key: "John" },
-          { key: "Jillian" },
-          { key: "Jimmy" },
-          { key: "Julie" }
-        ]}
-        renderItem={({ item }) => (
-          <Text style={{ margin: 50, height: 100, width: 100 }}>
-            {item.key}
-          </Text>
-        )}
-      />
+      <ScrollView style={Style.homeFlatList}>
+        {parsedSongsList.map(songDatas => (
+          <Card {...songDatas} />
+        ))}
+        <Button onPress={() => console.log("wesh")} label={"Load more ..."} />
+      </ScrollView>
     );
   }
 }
