@@ -9,6 +9,7 @@ import { View, Image, Text } from "react-native";
 /**
  * Local imports
  */
+import convertMillisToMinutesAndSeconds from "../../../Utils/generic";
 import Style from "./Style";
 import Button from "../../Components/Button";
 
@@ -20,9 +21,17 @@ import Button from "../../Components/Button";
  * @param {String} trackName
  */
 const Card = props => {
-  const { artworkUrl100, artistName, trackName, length, navigate } = props;
+  const {
+    artworkUrl100,
+    artistName,
+    trackName,
+    trackTimeMillis,
+    trackPrice,
+    collectionName,
+    navigate
+  } = props;
 
-  console.log(navigate);
+  const length = convertMillisToMinutesAndSeconds(trackTimeMillis);
 
   return (
     <View style={Style.cardView}>
@@ -37,8 +46,14 @@ const Card = props => {
       </View>
       <Button
         onPress={() => {
-          console.log("OK JE OASSEZ LA");
-          navigate("Details");
+          navigate("Details", {
+            artworkUrl100,
+            artistName,
+            trackName,
+            trackPrice,
+            collectionName,
+            length
+          });
         }}
         label="Details"
       />

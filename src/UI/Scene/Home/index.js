@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 /**
  * Local imports
  */
-import convertMillisToMinutesAndSeconds from "../../../Utils/generic";
 import Style from "./Style";
 import Card from "../../Components/Card";
 import Button from "../../Components/Button";
@@ -33,12 +32,8 @@ class HomeScene extends Component {
 
     return (
       <ScrollView style={Style.homeFlatList}>
-        {songs.songsList.map(songDatas => (
-          <Card
-            key={songDatas.trackId.toString()}
-            navigate={navigation.navigate}
-            {...songDatas}
-          />
+        {songs.songsList.map((songDatas, key) => (
+          <Card key={key} navigate={navigation.navigate} {...songDatas} />
         ))}
         <Button onPress={apiRequest} label="Load more ..." />
       </ScrollView>

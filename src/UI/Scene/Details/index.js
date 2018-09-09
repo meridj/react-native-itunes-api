@@ -4,17 +4,33 @@
  * Npm imports
  */
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 
 /**
  * Local imports
  */
 import Style from "./Style";
 
-const DetailsScene = props => {
+const DetailsScene = ({ navigation }) => {
+  const songDetails = [
+    navigation.getParam("artistName"),
+    navigation.getParam("collectionName"),
+    navigation.getParam("trackName"),
+    `${navigation.getParam("trackPrice")}$`,
+    navigation.getParam("length")
+  ];
+
+  const songDetailsToRender = songDetails.map((label, key) => (
+    <Text key={key}>{label}</Text>
+  ));
+
   return (
     <View style={Style.homeFlatList}>
-      <Text>OKKKKKKKKK DETAILS</Text>
+      <Image
+        style={{ width: 512, height: 512 }}
+        source={{ uri: navigation.getParam("artworkUrl100") }}
+      />
+      {songDetailsToRender}
     </View>
   );
 };
