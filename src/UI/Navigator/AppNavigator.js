@@ -14,9 +14,12 @@ console.log("Scene : ", Scene);
 const AppNavigator = createStackNavigator(
   {
     // ------------------------------------------------
-    // - Start scenes
+    // - Start scene
     [Scene.Home.key]: {
       screen: Scene.Home.component
+    },
+    [Scene.Details.key]: {
+      screen: Scene.Details.component
     }
   },
   {

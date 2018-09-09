@@ -16,31 +16,31 @@ import Card from "../../Components/Card";
 import Button from "../../Components/Button";
 import * as actions from "../../../Business/Action/";
 
+/**
+ *
+ * @param {String} artworkUrl100
+ * @param {String} artistName
+ * @param {String} length
+ * @param {String} trackName
+ */
 class HomeScene extends Component {
   componentDidMount() {
     this.props.apiRequest();
   }
 
   render() {
-    const { songsList } = this.props.songs;
-    const parsedSongsList = songsList.map(
-      ({ trackId, artistName, artworkUrl100, trackName, trackTimeMillis }) => {
-        return {
-          key: trackId.toString(),
-          artistName,
-          artworkUrl100,
-          trackName,
-          length: convertMillisToMinutesAndSeconds(trackTimeMillis)
-        };
-      }
-    );
+    const { songs, apiRequest, navigation } = this.props;
 
     return (
       <ScrollView style={Style.homeFlatList}>
-        {parsedSongsList.map(songDatas => (
-          <Card {...songDatas} />
+        {songs.songsList.map(songDatas => (
+          <Card
+            key={songDatas.trackId.toString()}
+            navigate={navigation.navigate}
+            {...songDatas}
+          />
         ))}
-        <Button onPress={() => console.log("wesh")} label="Load more ..." />
+        <Button onPress={apiRequest} label="Load more ..." />
       </ScrollView>
     );
   }

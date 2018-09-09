@@ -5,17 +5,20 @@
  */
 import { ApiActions } from "../Action/API";
 import { setNextSongs } from "../Action/Songs";
+import { incrementApiOffset } from "../Action/API";
 import HttpClient from "../../Layer/Network/HTTPClient";
 import NetworkUrls from "../../Layer/Network/NetworkUrls";
 
-const SongsMidExecuteNextSongsApiRequestMid = store => next => action => {
-  const { dispatch } = store;
+const MidExecuteNextSongsApiRequest = store => next => action => {
+  const { getState, dispatch } = store;
 
   // Pour gerer la pagination =>> &offset=3&
   switch (action.type) {
     case ApiActions.API_REQUEST:
+      const { offset } = getState().api;
+
       HttpClient.get(
-        `/${NetworkUrls.action}${NetworkUrls.nekfeuSongs}${
+        `/${NetworkUrls.action}${NetworkUrls.nekfeuSongs}&offset=${offset}&${
           NetworkUrls.resultLimit
         }`
       )
@@ -23,6 +26,7 @@ const SongsMidExecuteNextSongsApiRequestMid = store => next => action => {
           const { results } = res.data;
 
           dispatch(setNextSongs(results));
+          dispatch(incrementApiOffset());
         })
         .catch(res => console.log(res));
       break;
@@ -30,4 +34,4 @@ const SongsMidExecuteNextSongsApiRequestMid = store => next => action => {
   next(action);
 };
 
-export default SongsMidExecuteNextSongsApiRequestMid;
+export default MidExecuteNextSongsApiRequest;
